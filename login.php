@@ -1,48 +1,15 @@
 <?php
-    set_time_limit(6000);
-	
-	//lets start our session
+    //lets start our session
     session_start();
-    include ("scripts/mysql_connect.inc.php");
+	include ("scripts/mysql_connect.inc.php");
     $pCFUNC_ARG = mysql_real_escape_string(strip_tags(@$_GET['IPCFuncArg'])) or mysql_real_escape_string(strip_tags(@$_POST['IPCFuncArg']));
-?>
-<!--
-    /*
-       ============================================================================================================
-
-       =============================== CREATED WITH ALL THE ❤ LOVE ❤ IN THE WORLD ================================
-
-       ============================================================================================================
-
-
-              .8.              ,o888888o.        ,o888888o.    8 888888888o.            .8.           8 888888888o       ,o888888o.         ,o888888o.     8888888 8888888888     ,o888888o.             .8.                   ,8.       ,8.          8 888888888o
-             .888.            8888     `88.     8888     `88.  8 8888    `88.          .888.          8 8888    `88.  . 8888     `88.    . 8888     `88.         8 8888          8888     `88.          .888.                 ,888.     ,888.         8 8888    `88.
-            :88888.        ,8 8888       `8. ,8 8888       `8. 8 8888     `88         :88888.         8 8888     `88 ,8 8888       `8b  ,8 8888       `8b        8 8888       ,8 8888       `8.        :88888.               .`8888.   .`8888.        8 8888     `88
-           . `88888.       88 8888           88 8888           8 8888     ,88        . `88888.        8 8888     ,88 88 8888        `8b 88 8888        `8b       8 8888       88 8888                 . `88888.             ,8.`8888. ,8.`8888.       8 8888     ,88
-          .8. `88888.      88 8888           88 8888           8 8888.   ,88'       .8. `88888.       8 8888.   ,88' 88 8888         88 88 8888         88       8 8888       88 8888                .8. `88888.           ,8'8.`8888,8^8.`8888.      8 8888.   ,88'
-         .8`8. `88888.     88 8888           88 8888           8 888888888P'       .8`8. `88888.      8 8888888888   88 8888         88 88 8888         88       8 8888       88 8888               .8`8. `88888.         ,8' `8.`8888' `8.`8888.     8 888888888P'
-        .8' `8. `88888.    88 8888           88 8888           8 8888`8b          .8' `8. `88888.     8 8888    `88. 88 8888        ,8P 88 8888        ,8P       8 8888       88 8888              .8' `8. `88888.       ,8'   `8.`88'   `8.`8888.    8 8888
-       .8'   `8. `88888.   `8 8888       .8' `8 8888       .8' 8 8888 `8b.       .8'   `8. `88888.    8 8888      88 `8 8888       ,8P  `8 8888       ,8P        8 8888       `8 8888       .8'   .8'   `8. `88888.     ,8'     `8.`'     `8.`8888.   8 8888
-      .888888888. `88888.     8888     ,88'     8888     ,88'  8 8888   `8b.    .888888888. `88888.   8 8888    ,88'  ` 8888     ,88'    ` 8888     ,88'         8 8888          8888     ,88'   .888888888. `88888.   ,8'       `8        `8.`8888.  8 8888
-     .8'       `8. `88888.     `8888888P'        `8888888P'    8 8888     `88. .8'       `8. `88888.  8 888888888P       `8888888P'         `8888888P'           8 8888           `8888888P'    .8'       `8. `88888. ,8'         `         `8.`8888. 8 8888
-
-
-       *************************************************************************************************************
-       *                                                                                                           *
-       *                        Content:    PHP                                                                    *
-       *                        Website:    http://www.dagasonhackason.com/                                        *
-       *                                                                                                           *
-       *************************************************************************************************************
-    */																								                                                                                  
--->
-<!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php
+	
 	//NOW WE CHECK IF THE USER DOESN'T ALREADY EXIST
 	if( isset($_COOKIE["id"]) && $_COOKIE["id"] != "EXPIRED" ) {
 		if( loginCOOKIE_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_COOKIE["username"];
-			header("Location: " . $sUSER_REDIR);
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
 			exit();
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
@@ -61,16 +28,13 @@
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED COOKIE DETECTED AND DESTROYED !!!</b>");
 			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
-			
-			exit();
 		}
 	}
-	else if( isset($_SESSION["id"]) && $_SESSION["id"] != "EXPIRED" ){
+	else if( isset($_SESSION["id"]) ) {
 		if( loginSESSION_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_SESSION["id"];
-			header("Location: " . $sUSER_REDIR);
-			exit();
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
 		}
 		else if( loginSESSION_CHECK() == FALSE )
 		{
@@ -78,8 +42,6 @@
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED SESSION DETECTED AND DESTROYED !!!</b>");
 			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
-			
-			exit();
 		}
 	}
 
@@ -188,8 +150,38 @@
 				}
 			}
 		}
-	}
+	}		
 ?>
+<!--
+    /*
+       ============================================================================================================
+
+       =============================== CREATED WITH ALL THE ❤ LOVE ❤ IN THE WORLD ================================
+
+       ============================================================================================================
+
+
+              .8.              ,o888888o.        ,o888888o.    8 888888888o.            .8.           8 888888888o       ,o888888o.         ,o888888o.     8888888 8888888888     ,o888888o.             .8.                   ,8.       ,8.          8 888888888o
+             .888.            8888     `88.     8888     `88.  8 8888    `88.          .888.          8 8888    `88.  . 8888     `88.    . 8888     `88.         8 8888          8888     `88.          .888.                 ,888.     ,888.         8 8888    `88.
+            :88888.        ,8 8888       `8. ,8 8888       `8. 8 8888     `88         :88888.         8 8888     `88 ,8 8888       `8b  ,8 8888       `8b        8 8888       ,8 8888       `8.        :88888.               .`8888.   .`8888.        8 8888     `88
+           . `88888.       88 8888           88 8888           8 8888     ,88        . `88888.        8 8888     ,88 88 8888        `8b 88 8888        `8b       8 8888       88 8888                 . `88888.             ,8.`8888. ,8.`8888.       8 8888     ,88
+          .8. `88888.      88 8888           88 8888           8 8888.   ,88'       .8. `88888.       8 8888.   ,88' 88 8888         88 88 8888         88       8 8888       88 8888                .8. `88888.           ,8'8.`8888,8^8.`8888.      8 8888.   ,88'
+         .8`8. `88888.     88 8888           88 8888           8 888888888P'       .8`8. `88888.      8 8888888888   88 8888         88 88 8888         88       8 8888       88 8888               .8`8. `88888.         ,8' `8.`8888' `8.`8888.     8 888888888P'
+        .8' `8. `88888.    88 8888           88 8888           8 8888`8b          .8' `8. `88888.     8 8888    `88. 88 8888        ,8P 88 8888        ,8P       8 8888       88 8888              .8' `8. `88888.       ,8'   `8.`88'   `8.`8888.    8 8888
+       .8'   `8. `88888.   `8 8888       .8' `8 8888       .8' 8 8888 `8b.       .8'   `8. `88888.    8 8888      88 `8 8888       ,8P  `8 8888       ,8P        8 8888       `8 8888       .8'   .8'   `8. `88888.     ,8'     `8.`'     `8.`8888.   8 8888
+      .888888888. `88888.     8888     ,88'     8888     ,88'  8 8888   `8b.    .888888888. `88888.   8 8888    ,88'  ` 8888     ,88'    ` 8888     ,88'         8 8888          8888     ,88'   .888888888. `88888.   ,8'       `8        `8.`8888.  8 8888
+     .8'       `8. `88888.     `8888888P'        `8888888P'    8 8888     `88. .8'       `8. `88888.  8 888888888P       `8888888P'         `8888888P'           8 8888           `8888888P'    .8'       `8. `88888. ,8'         `         `8.`8888. 8 8888
+
+
+       *************************************************************************************************************
+       *                                                                                                           *
+       *                        Content:    PHP                                                                    *
+       *                        Website:    http://www.dagasonhackason.com/                                        *
+       *                                                                                                           *
+       *************************************************************************************************************
+    */																								                                                                                  
+-->
+<!DOCTYPE html PUBLIC "-//W3C/DTD XHTML 1.0 Transitional//EN" "http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
   <head>
     <!-- Meta Information TAGS Example -->
@@ -346,7 +338,6 @@
 					</center>
 					<h2>Member Login</h2>
 					<p>Please enter your username and password.</p>
-					
 					<?php 
 						$errorDetector				= strip_tags(@$_GET["isError"]);
 						$successDetector			= strip_tags(@$_GET["isSuccess"]);
@@ -648,10 +639,13 @@
 											$is_deleted_q                 	= mysql_query("SELECT is_deleted FROM users_table WHERE id='$db_ID'");
 											$is_deleted                		= mysql_result($is_deleted_q, 0);
 											
+											$reg_date_q                 	= mysql_query("SELECT reg_date FROM users_table WHERE id='$db_ID'");
+											$reg_date                		= mysql_result($reg_date_q, 0);
+											
 											$id_ins                         = $get_insert_id;
 
 											//CHECK FOR REMEMBER ME WHETHER / TO USE A COOKIE OR A SESSION 
-											if($is_remembered) {
+											if($is_remembered == "on" ) {
 												setcookie( "id", $id, time()+1209600, '/' );
 												setcookie( "username", $username, time()+1209600, '/' );
 												setcookie( "username_validate", $username_validate, time()+1209600, '/' );
@@ -664,13 +658,13 @@
 												setcookie( "gender", $gender, time()+1209600, '/' );
 												setcookie( "reg_date", $reg_date, time()+1209600, '/' );
 											}
-											else {
+											else if($is_remembered == "" ) {
 												$_SESSION["id"]                	= $id;
 												$_SESSION["username"]          	= $username;
 												$_SESSION["username_validate"] 	= $username_validate;
-												$_SESSION["login_log_id"]      	= $login_log_id;
-												$_SESSION["auth_key"]          	= $auth_key;
-												$_SESSION["auth_key_validate"] 	= $auth_key_validate;
+												$_SESSION["login_log_id"]      	= $get_insert_id;
+												$_SESSION["auth_key"]          	= $getEncryptionOperand;
+												$_SESSION["auth_key_validate"] 	= $getEncryptionOperand_validate;
 												$_SESSION["is_activated"]      	= $is_activated;
 												$_SESSION["email"]             	= $email;
 												$_SESSION["full_name"]        	= $full_name;
@@ -680,7 +674,7 @@
 											
 											if($query)
 											{
-												$NewLoginAlertVar 			= sendNewLoginAlert($email, $full_name, $login_log_id);
+												$NewLoginAlertVar 			= sendNewLoginAlert($email, $full_name, $get_insert_id);
 												
 												if($NewLoginAlertVar)
 												{
@@ -762,11 +756,11 @@
 					
 					<?php
 						echo "
-							<input type='hidden' id='number_of_tries' name='number_of_tries' value='" . $number_of_tries . "' /><br />;
+							<input type='hidden' id='number_of_tries' name='number_of_tries' value='" . $number_of_tries . "' /><br />
 						";
 					?>
 
-					<button type="submit" class="btn btn-primary" id="btn_login" name="btn_login"><i class="fa fa-check" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i> LOGIN</button><br /><br />
+					<button type="submit" class="btn btn-primary" id="btn_login" name="btn_login"><i class="fa fa-sign-in" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i> LOGIN</button><br /><br />
 					
 					<p class="botto-text"> Example <b>Login Page</b> <code>code</code> using the <b>Bootstrap Framework</b> with <code>PHP</code></p>
 				</form>
@@ -806,5 +800,8 @@
 	
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js" type="text/javascript" ></script>
+	
+	<!-- Personal Extra External JavaScript File -->
+	<script src="js/main-script.js" type="text/javascript" ></script>
   </body>
 </html>
