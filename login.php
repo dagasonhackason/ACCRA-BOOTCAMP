@@ -665,7 +665,17 @@
 												setcookie( "reg_date", $reg_date, time()+1209600, '/' );
 											}
 											else {
-												
+												$_SESSION["id"]                	= $id;
+												$_SESSION["username"]          	= $username;
+												$_SESSION["username_validate"] 	= $username_validate;
+												$_SESSION["login_log_id"]      	= $login_log_id;
+												$_SESSION["auth_key"]          	= $auth_key;
+												$_SESSION["auth_key_validate"] 	= $auth_key_validate;
+												$_SESSION["is_activated"]      	= $is_activated;
+												$_SESSION["email"]             	= $email;
+												$_SESSION["full_name"]        	= $full_name;
+												$_SESSION["gender"]        		= $gender;
+												$_SESSION["reg_date"]        	= $reg_date;
 											}
 											
 											if($query)
