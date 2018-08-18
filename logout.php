@@ -36,7 +36,7 @@
 		if( loginCOOKIE_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_COOKIE["username"];
-			header("Location: " . $sUSER_REDIR);
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
 			exit();
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
@@ -55,16 +55,13 @@
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED COOKIE DETECTED AND DESTROYED !!!</b>");
 			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
-			
-			exit();
 		}
 	}
-	else if( isset($_SESSION["id"]) && $_SESSION["id"] != "EXPIRED" ){
+	else if( isset($_SESSION["id"]) ) {
 		if( loginSESSION_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_SESSION["id"];
-			header("Location: " . $sUSER_REDIR);
-			exit();
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
 		}
 		else if( loginSESSION_CHECK() == FALSE )
 		{
@@ -72,8 +69,6 @@
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED SESSION DETECTED AND DESTROYED !!!</b>");
 			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
-			
-			exit();
 		}
 	}
 
@@ -405,5 +400,8 @@
 		
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js" type="text/javascript" ></script>
+		
+		<!-- Personal Extra External JavaScript File -->
+		<script src="js/main-script.js" type="text/javascript" ></script>
 	</body>
 </html>
