@@ -731,11 +731,11 @@
 			   
 				<form id="Login" method="POST" action="login.php" >
 					<div class="form-group">
-						<i class="fa fa-user-secret" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i><input type="text" class="form-control" placeholder="Username" id="username" name="username" required="" />
+						<i class="fa fa-user-secret" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -20px;"></i><input type="text" class="form-control" placeholder="Username" id="username" name="username" required="" />
 					</div>
 					
 					<div class="form-group">
-						<i class="fa fa-unlock-alt" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i><input type="password" class="form-control" placeholder="Password" id="password" name="password" required="" />
+						<i class="fa fa-unlock-alt" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -20px;"></i><input type="password" class="form-control" placeholder="Password" id="password" name="password" required="" />
 					</div>
 					
 					<div class="pull-left">
@@ -756,7 +756,7 @@
 						";
 					?>
 
-					<button type="submit" class="btn btn-primary" id="btn_login" name="btn_login">LOGIN</button><br /><br />
+					<button type="submit" class="btn btn-primary" id="btn_login" name="btn_login"><i class="fa fa-check" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i> LOGIN</button><br /><br />
 					
 					<p class="botto-text"> Example <b>Login Page</b> <code>code</code> using the <b>Bootstrap Framework</b> with <code>PHP</code></p>
 				</form>
