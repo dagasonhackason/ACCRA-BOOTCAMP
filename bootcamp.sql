@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `users_login_log_table` (
 ) AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Let us Dump Example DATA into login-logs Table
-INSERT IGNORE INTO `users_login_log_table` (`id`, `account_id`, `time_logged_in`, `time_logged_out`, `login_type`, `is_reported`, `is_blocked`, `device_login_from`, `device_logout_from`, `auth_key`, `auth_key_validate`) VALUES
-	(1, 'account_id', 'time_logged_in', 'time_logged_out', 'COOKIE', 'N', 'N', 'device_login_from', 'device_logout_from', 'auth_key', 'auth_key_validate');
+INSERT IGNORE INTO `users_login_log_table` (`id`, `account_id`, `time_logged_in`, `time_logged_out`, `login_type`, `is_reported`, `is_blocked`, `auth_key`, `auth_key_validate`) VALUES
+	(1, 'account_id', 'time_logged_in', 'time_logged_out', 'COOKIE', 'N', 'N', 'auth_key', 'auth_key_validate');
 
 
