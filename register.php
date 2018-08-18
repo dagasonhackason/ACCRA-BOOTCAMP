@@ -621,23 +621,23 @@
 			   
 				<form id="Register" method="POST" action="register.php" >
 					<div class="form-group">
-						<i class="fa fa-user-secret" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i><input type="text" class="form-control" placeholder="Username...." id="username" name="username" required="" />
+						<i class="fa fa-user-secret" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -20px;"></i><input type="text" class="form-control" placeholder="Username...." id="username" name="username" required="" />
 					</div>
 					
 					<div class="form-group">
-						<i class="fa fa-unlock-alt" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i><input type="password" class="form-control" placeholder="Password...." id="password" name="password" required="" />
+						<i class="fa fa-unlock-alt" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -20px;"></i><input type="password" class="form-control" placeholder="Password...." id="password" name="password" required="" />
 					</div>
 					
 					<div class="form-group">
-						<i class="fa fa-envelope" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i><input type="email" class="form-control" placeholder="Email...." id="email" name="email" required="" />
+						<i class="fa fa-envelope" style="position: relative; display: inline; float: left; margin-bottom: -29px; left: 15px; z-index: 10; font-size: 14px; bottom: -17px;"></i><input type="email" class="form-control" placeholder="Email...." id="email" name="email" required="" />
 					</div>
 					
 					<div class="form-group">
-						<i class="fa fa-user" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i><input type="text" class="form-control" placeholder="Full Name...." id="full_name" name="full_name" required="" />
+						<i class="fa fa-user" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i><input type="text" class="form-control" placeholder="Full Name...." id="full_name" name="full_name" required="" />
 					</div>
 
 					<div class="form-group">
-						<i class="fa fa-venus-mars" style="position: relative; display: inline; float: left; left: 15px; z-index: 10;"></i>
+						<i class="fa fa-venus-mars" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i>
 						<select class="form-control" id="gender" name="gender" >
 							<option value="MALE" selected>Male</option>
 							<option value="FEMALE" >Female</option>
@@ -658,7 +658,7 @@
 						";
 					?>
 
-					<button type="submit" class="btn btn-primary" id="btn_register" name="btn_register" >REGISTER</button><br /><br /> 
+					<button type="submit" class="btn btn-primary" id="btn_register" name="btn_register" ><i class="fa fa-check" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i> REGISTER</button><br /><br /> 
 					
 					<p class="botto-text"> Example <b>Registeration Page</b> <code>code</code> using the <b>Bootstrap Framework</b> with <code>PHP</code></p>
 				</form>
