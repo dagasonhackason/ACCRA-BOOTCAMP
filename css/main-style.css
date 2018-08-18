@@ -169,8 +169,8 @@ body#ProfilePage {
   position: relative; 
 }
 
-.profile-div .btn.btn-primary {
-  background: #333333 none repeat scroll 0 0;
+.profile-div .btn.btn-danger {
+  background: #AA1000 none repeat scroll 0 0;
   border-color: #666666;
   color: #ffffff;
   font-size: 14px;
