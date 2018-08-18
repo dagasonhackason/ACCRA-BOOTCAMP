@@ -32,11 +32,11 @@
 	include ("scripts/mysql_connect.inc.php");
 		
 	//NOW WE CHECK IF THE USER DOESN'T ALREADY EXIST
-	if( isset($_COOKIE["id"]) && $_COOKIE["id"] != "EXPIRED" ){
+	if( isset($_COOKIE["id"]) && $_COOKIE["id"] != "EXPIRED" ) {
 		if( loginCOOKIE_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_COOKIE["username"];
-			header("Location: " . $sUSER_REDIR);
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
 			exit();
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
@@ -55,16 +55,13 @@
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED COOKIE DETECTED AND DESTROYED !!!</b>");
 			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
-			
-			exit();
 		}
 	}
-	else if( isset($_SESSION["id"]) && $_SESSION["id"] != "EXPIRED" ){
+	else if( isset($_SESSION["id"]) ) {
 		if( loginSESSION_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_SESSION["id"];
-			header("Location: " . $sUSER_REDIR);
-			exit();
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
 		}
 		else if( loginSESSION_CHECK() == FALSE )
 		{
@@ -72,8 +69,6 @@
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED SESSION DETECTED AND DESTROYED !!!</b>");
 			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
-			
-			exit();
 		}
 	}
 
@@ -343,21 +338,23 @@
 						</center>
 						
 						<?php 
-							if(@$_GET['u'] == $sID)
+							$getIncomingRequestedUser	= @$_GET["u"];
+							if($getIncomingRequestedUser == $sUSER)
 							{
+								
 								echo"									
 									<h1>Full Name: " . $sFULL_NAME . "</h1><br />
 									<h2>Username: " . $sUSER . "</h2><br />
 									<h3>Email: " . $sEMAIL . "</h3><br />
 									<h4>Gender: " . $sGENDER . "</h4><br />
-									<p>Date You Registered: " . $sREG_DATE . "</p><br />
+									<p>Date You Registered: " . date("d", $sREG_DATE) . " / " . date("m", $sREG_DATE) . " / " . date("y", $sREG_DATE) . "</p><br />
 								";
 							}
 							else 
 							{
 								$dbQuery			= mysql_query("SELECT * 
 																   FROM users_table 
-																   WHERE username='@$_GET['u']' 
+																   WHERE username='$getIncomingRequestedUser' 
 																   LIMIT 1
 													") or print("									
 															<div class='alert alert-danger alert-dismissible' role='alert' style='position: relative; display: none;' >
@@ -376,11 +373,11 @@
 									$sREG_DATE 				= $rowResult["reg_date"];
 									
 									echo"									
-										<h1 class='text-success' ></h1>Username: " . $sUSER . "<br />
+										<h1 class='text-success' ></h1>Username: " . $sUSER . "<br /><br />
 										<h2>Full Name: " . $sFULL_NAME . "</h2><br />
 										<h3>Email: " . $sEMAIL . "</h3><br />
 										<h4>Gender: " . $sGENDER . "</h4><br />
-										<p>Date You Registered: " . $sREG_DATE . "</p><br />
+										<p>Date You Registered: " . date("d", $sREG_DATE) . " / " . date("m", $sREG_DATE) . " / " . date("y", $sREG_DATE) . "</p><br />
 									";
 								}
 								
@@ -399,7 +396,7 @@
 						<div id="Profile">
 							<br />
 							
-							<button type="submit" class="btn btn-danger" id="btn_logout" name="btn_logout"><a href="logout.php">LOGOUT</a></button><br /><br />
+							<button type="submit" class="btn btn-danger" id="btn_logout" name="btn_logout" onclick="javascript: callLogout();" ><i class="fa fa-power-off" style="position: relative; display: inline; float: left; margin-bottom: -31px; left: 15px; z-index: 10; font-size: 14px; bottom: -18px;"></i> LOGOUT</button><br /><br />
 							
 							<p class="botto-text"> Example <b>Profile Landing Page</b> <code>code</code> using the <b>Bootstrap Framework</b> with <code>PHP</code></p>
 						</div>
@@ -440,5 +437,8 @@
 		
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js" type="text/javascript" ></script>
+			
+		<!-- Personal Extra External JavaScript File -->
+		<script src="js/main-script.js" type="text/javascript" ></script>
 	</body>
 </html>
