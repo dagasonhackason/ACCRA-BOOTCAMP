@@ -475,7 +475,7 @@
 								$number_of_tries++;
 
 								//FOR VERIFICATION PURPOSES
-								if ( $signup == "Sign-Up" )
+								if ( $signUp == "Sign-Up" )
 								{
 									//CHECKING TO SEE IF ALL THE REGISTERATION FIELDS HAVE BEEN FILLED
 									if( $username != "" && $full_name != "" && $email != "" && $password != "" && $gender != "" )
@@ -485,7 +485,7 @@
 										{
 											if($email)
 											{
-												die("eARG21");
+												initError("eARG21");
 											}
 										}
 										else
@@ -497,14 +497,14 @@
 												$username_check                                  								= mysql_query("SELECT username
 																																			   FROM users_table
 																																			   WHERE username='$username'
-																																	  ") or die("eARG25");
+																																	  ") or initError("eARG25");
 												$check_username                                                                 = mysql_num_rows($username_check);
 												
 												//CHECKING DATABASE BASE TO SEE IF THE SELECTED EMAIL IS ALREADY EXISTING
 												$email_check                                  									= mysql_query("SELECT email
 																																			   FROM users_table
 																																			   WHERE email='$email'
-																																	  ") or die("eARG25");
+																																	  ") or initError("eARG25");
 												$check_email                                  									= mysql_num_rows($email_check);
 
 												if( $check_email == 0 && $check_username == 0 )
@@ -512,11 +512,11 @@
 													//CHECKING PASSWORD LENGHT... IF IT'S OKAY
 													if( strlen($password) > 18 )
 													{
-														die("eARG2");
+														initError("eARG2");
 													}
 													else if( strlen($password) < 6 )
 													{
-														die("eARG20");
+														initError("eARG20");
 													}
 													else
 													{
@@ -534,12 +534,12 @@
 														//LETS FIX ANY AUTO INCREMENT PROBLEMS IN DB TABLE SO IT'S  ALWAYS REMAINS ARITHMETIC BEFORE WE INSERT
 														$setAutoIncrQuery				                        	= mysql_query("ALTER TABLE `users_table`
 																																	AUTO_INCREMENT=1
-																													") or die("eARG25");
+																													") or initError("eARG25");
 														
 														//NOW LET'S INSERT THE USER REGISTERATION RECORDS IN TO THE DATABASE
 														$query          											= mysql_query("INSERT IGNORE INTO `users_table` (`id`, `is_activated`, `username`, `username_validate`, `password`, `password_validate`, `email`, `full_name`, `gender`, `is_deleted`, `reg_date`) VALUES
 																																   ('', 'N', '$username', '$username_validate', '$password', '$password_validate', '$email', '$full_name', '$gender', 'N', '$date');
-																													") or die("eARG25");
+																													") or initError("eARG25");
 														
 														//LET'S CHECK THE ID WE USED TO INSERT INCASE WE WANT TO WORK WITH THAT ENTRY ANYTIME
 														$userJustCreatedID											= mysql_insert_id();
@@ -550,11 +550,11 @@
 
 															if($confirmEmailWIthKeyVar)
 															{
-																die("sARGXXUSERMADE");
+																initSuccess("sARG1");
 															}
 															else if(!$confirmEmailWIthKeyVar)
 															{
-																die("eARGXXXX");
+																initError("eARGXXXX");
 															}
 															
 														}
@@ -565,17 +565,17 @@
 													//CHECKING IF ITS THE USERNAME THAT iS ALREADY THERE OR THE EMAIL TO GIVE INDIVIDUAL SPECIFIC ERRORS WOR WHICH ONE IT IS OR JUST GIVE A GENERAL ERROR FOR BOth OTH THEM ALREADY EXISTING
 													if ($check_username != 0 && $check_email == 0)
 													{
-														die("eARG5");
+														initError("eARG5");
 
 													}
 													else if ($check_email != 0 && $check_username == 0)
 													{
-														die("eARG6");
+														initError("eARG6");
 
 													}
 													else
 													{
-														die("eARG27");
+														initError("eARG27");
 													}
 												}
 											}
@@ -586,22 +586,22 @@
 										//CROSS CHECKING TO SEE IF THEY ARE TRUELY EMPTY BEFORE GIVING AN ERROR PERTAINING TO THAT ERROR
 										if( $username == "" || $full_name == "" || $email == "" || $password == "" || $phonenumber == "" )
 										{
-											die("eARG4");
+											initError("eARG4");
 										}
 									}
 								}
 								else {
-									die("eARG12");
+									initError("eARG12");
 								}
 							} 
 							else {
-								die("eARG45");
+								initError("eARG45");
 							}
 						}
 						else {
 							if($number_of_tries > 20)
 							{
-								die("eARGZ");
+								initError("eARGZ");
 							}
 						}
 					?>
