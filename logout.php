@@ -37,7 +37,6 @@
 		{
 			$sUSER_REDIR = $_COOKIE["username"];
 			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
-			exit();
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
 		{
