@@ -40,6 +40,12 @@
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
 		{
+			$date		= time();
+			$sql            = mysql_query( "UPDATE users_login_log_table
+							SET time_logged_out='$date' 
+							WHERE id='@$_COOKIE[\"login_log_id\"]'
+					");
+			
 			setcookie( "id", "EXPIRED", time()-1209600 );
 			setcookie( "username", "EXPIRED", time()-1209600 );
 			setcookie( "username_validate", "EXPIRED", time()-1209600 );
@@ -64,6 +70,13 @@
 		}
 		else if( loginSESSION_CHECK() == FALSE )
 		{
+					
+			$date		= time();
+			$sql            = mysql_query( "UPDATE users_login_log_table
+							SET time_logged_out='$date' 
+							WHERE id='@$_SESSION[\"login_log_id\"]'
+					");
+										
 			session_destroy();
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED SESSION DETECTED AND DESTROYED !!!</b>");
@@ -80,7 +93,7 @@
 			$sUSER          		= @$_COOKIE["username"];
 			$sUSER_VALIDATE 		= @$_COOKIE["username_validate"];
 			$sAUTH_KEY      		= @$_COOKIE["auth_key"];
-			$sAUTH_KEY_VALIDATE 	= @$_COOKIE["auth_key_validate"];
+			$sAUTH_KEY_VALIDATE 		= @$_COOKIE["auth_key_validate"];
 			$sLOGIN_LOG_ID 			= @$_COOKIE["login_log_id"];
 			$sFULL_NAME 			= @$_COOKIE["full_name"];
 			$sEMAIL 				= @$_COOKIE["email"];
@@ -134,7 +147,7 @@
 			$sUSER      			= @$_SESSION["username"];
 			$sUSER_VALIDATE 		= @$_SESSION["username_validate"];
 			$sAUTH_KEY    			= @$_SESSION["auth_key"];
-			$sAUTH_KEY_VALIDATE 	= @$_SESSION["auth_key_validate"];
+			$sAUTH_KEY_VALIDATE 		= @$_SESSION["auth_key_validate"];
 			$sLOGIN_LOG_ID 			= @$_SESSION["login_log_id"];
 			$sFULL_NAME 			= @$_SESSION["full_name"];
 			$sEMAIL 				= @$_SESSION["email"];
@@ -344,7 +357,7 @@
 								$date		= time();
 								$sql            = mysql_query( "UPDATE users_login_log_table
 												SET time_logged_out='$date' 
-												WHERE id='$sLOGIN_LOG_ID'
+												WHERE id='@$_SESSION[\"login_log_id\"]'
 										");
 												
 								session_destroy();
@@ -354,7 +367,7 @@
 								$date		= time();
 								$sql            = mysql_query( "UPDATE users_login_log_table
 												SET time_logged_out='$date' 
-												WHERE id='$sLOGIN_LOG_ID'
+												WHERE id='@$_COOKIE[\"login_log_id\"]'
 										");
 										
 								setcookie( "id", "EXPIRED", time()-1209600 );
