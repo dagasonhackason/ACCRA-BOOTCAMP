@@ -340,9 +340,23 @@
 						{
 							//loging out
 							if( isset($_SESSION["id"]) ){
-								 session_destroy();
+										
+								$date		= time();
+								$sql            = mysql_query( "UPDATE users_login_log_table
+												SET time_logged_out='$date' 
+												WHERE id='$sLOGIN_LOG_ID'
+										");
+												
+								session_destroy();
 							}
 							else if( isset($_COOKIE["id"]) ){
+										
+								$date		= time();
+								$sql            = mysql_query( "UPDATE users_login_log_table
+												SET time_logged_out='$date' 
+												WHERE id='$sLOGIN_LOG_ID'
+										");
+										
 								setcookie( "id", "EXPIRED", time()-1209600 );
 								setcookie( "username", "EXPIRED", time()-1209600 );
 								setcookie( "username_validate", "EXPIRED", time()-1209600 );
