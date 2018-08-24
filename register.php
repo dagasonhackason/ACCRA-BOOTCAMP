@@ -5,7 +5,7 @@
     $pCFUNC_ARG = mysql_real_escape_string(strip_tags(@$_GET['IPCFuncArg'])) or mysql_real_escape_string(strip_tags(@$_POST['IPCFuncArg']));
 	
 	//NOW WE CHECK IF THE USER DOESN'T ALREADY EXIST
-	if( isset($_COOKIE["id"]) && $_COOKIE["id"] != "EXPIRED" ) {
+	if( isset($_COOKIE["id"]) && $_COOKIE["id"] != "EXPIRED" ){
 		if( loginCOOKIE_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_COOKIE["username"];
@@ -13,6 +13,14 @@
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
 		{
+			$sLOGIN_LOG_ID 	= @$_COOKIE["login_log_id"];
+			
+			$date		= time();
+			$sql            = mysqli_query( $db_Connection, "UPDATE users_login_log_table
+									 SET time_logged_out='$date' 
+									 WHERE id='$sLOGIN_LOG_ID'
+					");
+			
 			setcookie( "id", "EXPIRED", time()-1209600 );
 			setcookie( "username", "EXPIRED", time()-1209600 );
 			setcookie( "username_validate", "EXPIRED", time()-1209600 );
@@ -26,7 +34,7 @@
 			setcookie( "reg_date", "EXPIRED", time()-1209600 );
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED COOKIE DETECTED AND DESTROYED !!!</b>");
-			echo "<script type='text/javascript'>window.location = register.php?isError=true&sMSG=" . $errorEncode . "';</script>";
+			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
 		}
 	}
 	else if( isset($_SESSION["id"]) ) {
@@ -37,10 +45,18 @@
 		}
 		else if( loginSESSION_CHECK() == FALSE )
 		{
+			$sLOGIN_LOG_ID 	= @$_SESSION["login_log_id"];		
+			
+			$date		= time();
+			$sql            = mysqli_query( $db_Connection, "UPDATE users_login_log_table
+									 SET time_logged_out='$date' 
+									 WHERE id='$sLOGIN_LOG_ID'
+					");
+										
 			session_destroy();
 			
 			$errorEncode = urlencode("WARNING :: IMPERSONATED SESSION DETECTED AND DESTROYED !!!</b>");
-			echo "<script type='text/javascript'>window.location = register.php?isError=true&sMSG=" . $errorEncode . "';</script>";
+			echo "<script type='text/javascript'>window.location = login.php?isError=true&sMSG=" . $errorEncode . "';</script>";
 		}
 	}
 
