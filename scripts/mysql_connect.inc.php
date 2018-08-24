@@ -30,10 +30,10 @@
 	//Including our Database variables
     require( "config/dbConfig.php" );
 
-	$errorEncode = urlencode("UNKNOWN ERROR:: OUR DEVELOPERS ARE WORKING ON IT... !!!</b>");
+	$errorEncode = urlencode("UNKNOWN ERROR:: OUR DEVELOPERS ARE WORKING ON IT... !!!");
 	
 	//Let us Connect to our Database
-    $db_Connection  = mysql_connect( $db_Host, $db_User, $db_Password ) or die("<script type='text/javascript'>window.location = login.php?isError=true&eMSG=" . $errorEncode . "';</script>");
+    $db_Connection  = mysql_connect( $db_Host, $db_User, $db_Password ) or die("<script type='text/javascript'>window.location = 'login.php?isError=true&eMSG=" . $errorEncode . "';</script>");
     mysql_select_db( $db_Name, $db_Connection );
 
 ?>
