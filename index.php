@@ -42,7 +42,7 @@
 		if( loginCOOKIE_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_COOKIE["username"];
-			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . '";</script>';
 		}
 		else if( loginCOOKIE_CHECK() == FALSE )
 		{
@@ -74,7 +74,7 @@
 		if( loginSESSION_CHECK() == TRUE )
 		{
 			$sUSER_REDIR = $_SESSION["id"];
-			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . "';</script>";
+			echo '<script type="text/javascript">window.location = "' . $sUSER_REDIR . '";</script>';
 		}
 		else if( loginSESSION_CHECK() == FALSE )
 		{
