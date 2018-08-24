@@ -43,9 +43,9 @@
 			$sLOGIN_LOG_ID 	= @$_COOKIE["login_log_id"];
 			
 			$date		= time();
-			$sql            = mysqli_query( $db_Connection, "UPDATE users_login_log_table
-									 SET time_logged_out='$date' 
-									 WHERE id='$sLOGIN_LOG_ID'
+			$sql            = mysql_query( "UPDATE users_login_log_table
+							SET time_logged_out='$date' 
+							WHERE id='$sLOGIN_LOG_ID'
 					");
 			
 			setcookie( "id", "EXPIRED", time()-1209600 );
@@ -75,9 +75,9 @@
 			$sLOGIN_LOG_ID 	= @$_SESSION["login_log_id"];		
 			
 			$date		= time();
-			$sql            = mysqli_query( $db_Connection, "UPDATE users_login_log_table
-									 SET time_logged_out='$date' 
-									 WHERE id='$sLOGIN_LOG_ID'
+			$sql            = mysql_query( "UPDATE users_login_log_table
+							SET time_logged_out='$date' 
+							WHERE id='$sLOGIN_LOG_ID'
 					");
 										
 			session_destroy();
